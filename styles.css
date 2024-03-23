@@ -1,3 +1,7 @@
+html * {
+  font-family: "Inter", sans-serif;
+}
+
 /* apply a natural box layout model to all elements, but allowing components to change */
 html {
   box-sizing: border-box;
@@ -9,4 +13,25 @@ html {
   box-sizing: inherit;
 }
 
+small {
+  display: block;
+}
 
+.contenedor-principal {
+  padding: 1rem;
+}
+
+.input-usuario {
+  color: #0a3871;
+  margin-top: 2rem;
+  width: 100%;
+  min-height: 100px;
+  font-size: 32px;
+  resize: none; /* Evita que el usuario redimensione manualmente el textarea */
+  overflow: hidden;
+} 
+
+
+.input-usuario::placeholder {
+  color: #0a3871;
+}
