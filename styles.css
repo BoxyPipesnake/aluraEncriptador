@@ -1,3 +1,7 @@
+:root {
+  --dark-blue-300: #0a3871;
+}
+
 html * {
   font-family: "Inter", sans-serif;
 }
@@ -13,8 +17,12 @@ html {
   box-sizing: inherit;
 }
 
-small {
-  display: block;
+body, textarea {
+  background-color: #E5E5E5;
+}
+
+.alura-logo {
+  margin-bottom: 2rem;
 }
 
 .contenedor-principal {
@@ -22,16 +30,57 @@ small {
 }
 
 .input-usuario {
-  color: #0a3871;
+  color: var(--dark-blue-300);
   margin-top: 2rem;
+  margin-bottom: 1rem;
   width: 100%;
-  min-height: 100px;
-  font-size: 32px;
+  min-height: 250px;
+  font-size: 2rem;
   resize: none; /* Evita que el usuario redimensione manualmente el textarea */
   overflow: hidden;
+
+  border: none;
 } 
 
-
 .input-usuario::placeholder {
-  color: #0a3871;
+  color: var(--dark-blue-300);
+}
+
+small {
+  display: block;
+  font-size: 0.75rem;
+  color: #67808E;
+}
+
+.simbolo-admiracion {
+  margin-right: 0.313rem;
+  vertical-align: middle;
+}
+
+.contenedor-funciones {
+  margin: 0.5rem 0 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.boton-encriptar, .boton-desencriptar {
+  padding: 1.5rem;
+  border: 1px solid var(--dark-blue-300);
+  border-radius: 17px;
+  cursor: pointer;
+}
+
+.boton-encriptar {
+  background-color: var(--dark-blue-300);
+  color: #ffffff;
+}
+
+.boton-desencriptar {
+  color: var(--dark-blue-300);
+  background-color: transparent;
+}
+
+.contenedor-output {
+  margin-top: 2rem;
 }
