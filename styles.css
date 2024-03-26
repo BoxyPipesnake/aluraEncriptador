@@ -99,7 +99,11 @@ small {
   color: var(--gray-400);
 }
 
-.contenedor-output p:first-child {
+.muñeco {
+  display: none;
+}
+
+.contenedor-output p:nth-child(2) {
   font-weight: bold;
   font-size: 1.5rem;
   color: var(--gray-500);
@@ -117,3 +121,22 @@ small {
 
   display: none;
 }
+
+/* Estilos para tablets en general */
+@media only screen and (min-width: 600px){
+  .contenedor-funciones {
+    flex-direction: row;
+  }  
+  .contenedor-funciones button {
+    flex: 1; /* Ocupa el 50% del ancho disponible */
+}
+}
+
+@media only screen and (min-width: 1024px) {
+
+  
+
+  .contenedor-output .muñeco {
+      display: inline-block; 
+  }
+} 
