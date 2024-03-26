@@ -32,7 +32,7 @@ button {
   margin-bottom: 2rem;
 }
 
-.contenedor-principal {
+.contenedor-externo {
   padding: 1rem;
 }
 
@@ -132,9 +132,61 @@ small {
 }
 }
 
-@media only screen and (min-width: 1024px) {
 
-  
+
+@media only screen and (min-width: 1024px) {
+/* Establece una altura del 100% para el cuerpo y el elemento HTML */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.contenedor-externo {
+  height: 100%;
+  display: flex;
+  flex-direction: column; /* Alinear los elementos verticalmente */
+}
+
+.titulo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 1rem 1rem 1rem 3rem;
+}
+
+.input-usuario {
+  margin-top: 10rem;
+}
+
+.contenedor-principal {
+  flex: 1; /* Ocupa todo el espacio disponible verticalmente */
+  display: flex;
+  gap: 5rem;
+}
+
+.seccion-1 {
+  flex: 2; /* Ocupa 2/3 del espacio disponible */
+  margin-left: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.seccion-2 {
+  flex: 1;/* Ocupa 1/3 del espacio disponible */
+  max-width: 400px;
+}
+
+  .contenedor-output {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
   .contenedor-output .muñeco {
       display: inline-block; 

@@ -14,26 +14,41 @@
 
 <body>
 
-    <div class="contenedor-principal">    
-        <h1>
-            <img class="alura-logo" src="./img/aluralogo.png" alt="alura latam logo">
-        </h1>
+    <div class="contenedor-externo">
+        
 
-        <textarea class="input-usuario" placeholder="Ingrese el texto aquí" oninput="autoResize(this)" maxlength="200"></textarea>
+        <main class="contenedor-principal">
+            
+            <section class="seccion-1">
+                <h1 class="titulo">
+                    <img class="alura-logo" src="./img/aluralogo.png" alt="alura latam logo">
+                </h1>
+                <textarea class="input-usuario" placeholder="Ingrese el texto aquí" oninput="autoResize(this)"
+                    maxlength="257"></textarea>
+    
+                <div class="divisor">
 
-        <small><img class="simbolo-admiracion" src="./img/bi_exclamation-circle-fill.png" alt="Simbolo de admiración"> Solo letras minúsculas y sin acentos</small>
-        <div class="contenedor-funciones">
-            <button class="boton-encriptar" type="button">Encriptar</button>
-            <button class="boton-desencriptar" "button">Desencriptar</button>
-        </div>
+                    <small><img class="simbolo-admiracion" src="./img/bi_exclamation-circle-fill.png"
+                            alt="Simbolo de admiración"> Solo letras minúsculas y sin acentos</small>
+                    <div class="contenedor-funciones">
+                        <button class="boton-encriptar" type="button">Encriptar</button>
+                        <button class="boton-desencriptar" "button">Desencriptar</button>
+                    </div>
+                </div>
 
-        <div class="contenedor-output">
-            <img class="muñeco" src="./img/Muneco.png" alt="Imagen Muñeco">
-            <p>Ningún mensaje fue encontrado</p>
-            <p>Ingresa el texto que desees encriptar o desencriptar.</p>
-            <button class="boton-copiar" type="button">Copiar</button>
-        </div>
-
+            </section>
+    
+            <section class="seccion-2">
+                <div class="contenedor-output">
+                    <img class="muñeco" src="./img/Muneco.png" alt="Imagen Muñeco">
+                    <p>Ningún mensaje fue encontrado</p>
+                    <p>Ingresa el texto que desees encriptar o desencriptar.</p>
+                    <button class="boton-copiar" type="button">Copiar</button>
+                </div>
+            </section>
+    
+        </main>
+        
     </div>
 
     <script src="app.js"></script>
