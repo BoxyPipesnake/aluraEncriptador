@@ -4,6 +4,7 @@
   --gray-400: #495057;
   --gray-500: #343A40;
   --hover-gray: #D8DFE8;
+  --red: #ff0000;
 }
 
 html * {
@@ -129,6 +130,7 @@ small {
   margin-bottom: 1rem;
 }
 
+
 .boton-copiar {
   background-color: transparent;
   color: var(--dark-blue-300);
@@ -138,7 +140,20 @@ small {
   border-radius: 17px;
   margin-top: 1rem;
 
-  display: none;
+}
+
+
+/* Estilos mensaje error */
+.error-encriptar {
+  color: var(--red);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Estilos mensaje encriptado */
+.texto-encriptado {
+  color: var(--dark-blue-300);
+  font-size: 2rem;
 }
 
 /* Estilos para tablets en general */
