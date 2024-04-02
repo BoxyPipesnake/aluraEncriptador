@@ -8,6 +8,10 @@ const botonEncriptar = document.getElementById('boton-encriptar');
 const botonDesencriptar = document.getElementById('boton-desencriptar');
 const contenedorOutput = document.getElementById('contenedor-output');
 
+const muñeco = document.querySelector('.muñeco');
+const parrafoSinMensaje = document.querySelector('p:nth-child(2)');
+const parrafoIngresaTexto = document.querySelector('p:nth-child(3)');
+
 // Elemento para mostrar mensajes de error
 const mensajeError = document.createElement('p');
 mensajeError.classList.add('error-encriptar'); 
@@ -51,6 +55,22 @@ const ocultarMensajeError = () => {
     mensajeError.textContent = '';
 };
 
+const mostrarElementosIniciales = (mostrar) => {
+    const elementosIniciales = [parrafoSinMensaje, parrafoIngresaTexto];
+    const displayValue = mostrar ? 'block' : 'none';
+
+    elementosIniciales.forEach(elemento => {
+        elemento.style.display = displayValue;
+    });
+
+    if (window.matchMedia('(min-width: 1024px)').matches) {
+        muñeco.style.display = mostrar ? 'block' : 'none';
+    }
+    
+    // Ajusta el estilo del contenedor según la visibilidad de los elementos
+    contenedorOutput.style.justifyContent = mostrar ? 'center' : 'flex-start';
+}
+
 // Función para manejar el evento de encriptar
 const manejarEncriptar = () => {
     const mensaje = inputUsuario.value.toLowerCase().trim();
@@ -59,29 +79,37 @@ const manejarEncriptar = () => {
     if (mensaje === '') {
         mostrarMensajeError('El campo de texto está vacío.');
         botonCopiar.style.display = 'none';
-        contenedorOutput.textContent = ''; // Limpia el contenido actual
+        parrafoEncriptado.textContent = '';
+
+        mostrarElementosIniciales(true); // Mostrar elementos iniciales
     } else {
+
         // Verifica si hay caracteres especiales o acentos
         const hasSpecialCharacters = /[^a-z\s]/i.test(mensaje);
         if (hasSpecialCharacters) {
             mostrarMensajeError('No se permiten caracteres especiales o acentos.');
             botonCopiar.style.display = 'none'; 
-            contenedorOutput.textContent = '';  
+            parrafoEncriptado.textContent = '';  
+            
+            mostrarElementosIniciales(true);
+
         } else {
             ocultarMensajeError();
             const mensajeEncriptado = encriptarTexto(mensaje);
             parrafoEncriptado.textContent = mensajeEncriptado;
             botonCopiar.style.display = 'block';
 
-            contenedorOutput.textContent = ''; 
             contenedorOutput.appendChild(parrafoEncriptado);
             contenedorOutput.appendChild(botonCopiar);
+
+
+            mostrarElementosIniciales(false); // Ocultar elementos iniciales
 
             console.log('Mensaje encriptado:', mensajeEncriptado);
         }
     }
-};
 
+};
 
 // Agrega eventos al botón de encriptar
 botonEncriptar.addEventListener('click', manejarEncriptar);
