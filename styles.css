@@ -154,7 +154,7 @@ small {
 }
 
 /* Estilos mensaje encriptado */
-.texto-encriptado {
+.resultado {
   color: var(--dark-blue-300);
   font-size: 2rem;
 }

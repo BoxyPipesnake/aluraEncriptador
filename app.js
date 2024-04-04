@@ -3,27 +3,50 @@ function autoResize(textarea) {
     textarea.style.height = textarea.scrollHeight + 'px';
 }
 
-const inputUsuario = document.getElementById('input-usuario');
 const botonEncriptar = document.getElementById('boton-encriptar');
 const botonDesencriptar = document.getElementById('boton-desencriptar');
-const contenedorOutput = document.getElementById('contenedor-output');
-
-const muñeco = document.querySelector('.muñeco');
-const parrafoSinMensaje = document.querySelector('p:nth-child(2)');
-const parrafoIngresaTexto = document.querySelector('p:nth-child(3)');
-
-// Elemento para mostrar mensajes de error
-const mensajeError = document.createElement('p');
-mensajeError.classList.add('error-encriptar'); 
-
-// Elemento <p> para el texto encriptado
-const parrafoEncriptado = document.createElement('p');
-parrafoEncriptado.classList.add('texto-encriptado'); 
-
-// Elemento botón de copiar
 const botonCopiar = document.createElement('button');
 botonCopiar.textContent = 'Copiar';
-botonCopiar.classList.add('boton-copiar'); 
+botonCopiar.classList.add('boton-copiar');
+botonCopiar.style.display = 'none'; // Lo ocultamos inicialmente
+
+const contenedorOutput = document.getElementById('contenedor-output');
+const inputUsuario = document.getElementById('input-usuario');
+
+const parrafoResultado = document.createElement('p');
+parrafoResultado.classList.add('resultado');
+contenedorOutput.appendChild(parrafoResultado); // Agregamos el párrafo al contenedor
+
+const mensajeError = document.createElement('p');
+mensajeError.classList.add('error');
+mensajeError.style.color = 'red';
+inputUsuario.insertAdjacentElement('afterend', mensajeError); // Insertamos el mensaje de error después del input
+
+const mostrarMensajeError = (mensaje) => {
+    mensajeError.textContent = mensaje;
+};
+
+const ocultarMensajeError = () => {
+    mensajeError.textContent = '';
+};
+
+const mostrarElementosIniciales = (mostrar) => {
+    const parrafoSinMensaje = document.querySelector('.parrafo-sin-mensaje');
+    const parrafoIngresaTexto = document.querySelector('.parrafo-ingresa-texto');
+    const muñeco = document.querySelector('.muñeco');
+    const displayValue = mostrar ? 'block' : 'none';
+
+    if (parrafoSinMensaje && parrafoIngresaTexto) {
+        parrafoSinMensaje.style.display = displayValue;
+        parrafoIngresaTexto.style.display = displayValue;
+    }
+
+    if (window.matchMedia('(min-width: 1024px)').matches && muñeco) {
+        muñeco.style.display = mostrar ? 'block' : 'none';
+    }
+
+    contenedorOutput.style.justifyContent = mostrar ? 'center' : 'space-between';
+};
 
 const encriptarTexto = (texto) => {
     const encriptaciones = {
@@ -34,10 +57,9 @@ const encriptarTexto = (texto) => {
         'u': 'ufat'
     };
 
-    // Encripta el texto
     const textoEncriptado = texto.split('').map(letra => {
         if (letra === ' ') {
-            return ' '; // Mantener los espacios sin encriptar
+            return ' ';
         }
         return encriptaciones[letra] || letra;
     }).join('');
@@ -45,71 +67,51 @@ const encriptarTexto = (texto) => {
     return textoEncriptado;
 };
 
+const desencriptarTexto = (textoEncriptado) => {
+    const desencriptaciones = {
+        'enter': 'e',
+        'imes': 'i',
+        'ai': 'a',
+        'ober': 'o',
+        'ufat': 'u'
+    };
 
-const mostrarMensajeError = (mensaje) => {
-    mensajeError.textContent = mensaje;
-    inputUsuario.insertAdjacentElement('afterend', mensajeError); // Inserta el mensaje debajo del textarea
+    const textoDesencriptado = textoEncriptado.replace(/enter|imes|ai|ober|ufat/g, match => desencriptaciones[match]);
+
+    return textoDesencriptado;
 };
 
-const ocultarMensajeError = () => {
-    mensajeError.textContent = '';
-};
+const manejarInputUsuario = (texto, tipo) => {
+    const mensaje = texto.toLowerCase().trim();
 
-const mostrarElementosIniciales = (mostrar) => {
-    const elementosIniciales = [parrafoSinMensaje, parrafoIngresaTexto];
-    const displayValue = mostrar ? 'block' : 'none';
+    // Limpiar el resultado anterior y ocultar el botón de copiar
+    parrafoResultado.textContent = '';
+    botonCopiar.style.display = 'none';
 
-    elementosIniciales.forEach(elemento => {
-        elemento.style.display = displayValue;
-    });
-
-    if (window.matchMedia('(min-width: 1024px)').matches) {
-        muñeco.style.display = mostrar ? 'block' : 'none';
-    }
-    
-    // Ajusta el estilo del contenedor según la visibilidad de los elementos
-    contenedorOutput.style.justifyContent = mostrar ? 'center' : 'flex-start';
-}
-
-// Función para manejar el evento de encriptar
-const manejarEncriptar = () => {
-    const mensaje = inputUsuario.value.toLowerCase().trim();
-
-    // Verifica si el input está vacío
     if (mensaje === '') {
         mostrarMensajeError('El campo de texto está vacío.');
-        botonCopiar.style.display = 'none';
-        parrafoEncriptado.textContent = '';
-
-        mostrarElementosIniciales(true); // Mostrar elementos iniciales
-    } else {
-
-        // Verifica si hay caracteres especiales o acentos
-        const hasSpecialCharacters = /[^a-z\s]/i.test(mensaje);
-        if (hasSpecialCharacters) {
-            mostrarMensajeError('No se permiten caracteres especiales o acentos.');
-            botonCopiar.style.display = 'none'; 
-            parrafoEncriptado.textContent = '';  
-            
-            mostrarElementosIniciales(true);
-
-        } else {
-            ocultarMensajeError();
-            const mensajeEncriptado = encriptarTexto(mensaje);
-            parrafoEncriptado.textContent = mensajeEncriptado;
-            botonCopiar.style.display = 'block';
-
-            contenedorOutput.appendChild(parrafoEncriptado);
-            contenedorOutput.appendChild(botonCopiar);
-
-
-            mostrarElementosIniciales(false); // Ocultar elementos iniciales
-
-            console.log('Mensaje encriptado:', mensajeEncriptado);
-        }
+        mostrarElementosIniciales(true); 
+        return;
     }
 
+    const hasSpecialCharacters = /[^a-z\s]/i.test(mensaje);
+    if (hasSpecialCharacters) {
+        mostrarMensajeError('No se permiten caracteres especiales o acentos.');
+        mostrarElementosIniciales(true);
+        return;
+    }
+
+    // mostrarElementosIniciales(true); -> Mostrar elementos iniciales si hay un error
+
+    ocultarMensajeError();
+    const textoTransformado = tipo === 'encriptar' ? encriptarTexto(mensaje) : desencriptarTexto(mensaje);
+
+    parrafoResultado.textContent = textoTransformado;
+    botonCopiar.style.display = 'block';
+    mostrarElementosIniciales(false); // Ocultar elementos iniciales si la encriptación o desencriptación es exitosa
 };
 
-// Agrega eventos al botón de encriptar
-botonEncriptar.addEventListener('click', manejarEncriptar);
+botonEncriptar.addEventListener('click', () => manejarInputUsuario(inputUsuario.value, 'encriptar'));
+botonDesencriptar.addEventListener('click', () => manejarInputUsuario(inputUsuario.value, 'desencriptar'));
+
+contenedorOutput.appendChild(botonCopiar);
