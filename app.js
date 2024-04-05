@@ -115,3 +115,15 @@ botonEncriptar.addEventListener('click', () => manejarInputUsuario(inputUsuario.
 botonDesencriptar.addEventListener('click', () => manejarInputUsuario(inputUsuario.value, 'desencriptar'));
 
 contenedorOutput.appendChild(botonCopiar);
+
+botonCopiar.addEventListener('click', async () => {
+    const textoCopiar = parrafoResultado.textContent;
+
+    try {
+        // Uso de Clipboard API para copiar el texto encriptado/desencriptado al portapapeles
+        await navigator.clipboard.writeText(textoCopiar);
+        alert('Texto copiado al portapapeles: ' + textoCopiar);
+    } catch (err) {
+        console.error('Error al copiar el texto:', err);
+    }
+});
