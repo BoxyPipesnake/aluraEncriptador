@@ -145,12 +145,12 @@ small {
 
 }
 
-
 /* Estilos mensaje error */
-.error-encriptar {
+.error {
   color: var(--red);
   font-weight: bold;
   text-transform: uppercase;
+  margin-bottom: 0.7rem;
 }
 
 /* Estilos mensaje encriptado */
@@ -240,4 +240,9 @@ small {
   .contenedor-output .muñeco {
       display: inline-block; 
   }
+
+  .error {
+    margin-bottom: 0;
+  }
+
 } 
