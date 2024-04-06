@@ -31,18 +31,13 @@ const ocultarMensajeError = () => {
 };
 
 const mostrarElementosIniciales = (mostrar) => {
-    const parrafoSinMensaje = document.querySelector('.parrafo-sin-mensaje');
-    const parrafoIngresaTexto = document.querySelector('.parrafo-ingresa-texto');
-    const muñeco = document.querySelector('.muñeco');
+
+    const iniciales = document.querySelector('.iniciales');
+
     const displayValue = mostrar ? 'block' : 'none';
 
-    if (parrafoSinMensaje && parrafoIngresaTexto) {
-        parrafoSinMensaje.style.display = displayValue;
-        parrafoIngresaTexto.style.display = displayValue;
-    }
-
-    if (window.matchMedia('(min-width: 1024px)').matches && muñeco) {
-        muñeco.style.display = mostrar ? 'block' : 'none';
+    if (iniciales) {
+        iniciales.style.display = displayValue;
     }
 
     contenedorOutput.style.justifyContent = mostrar ? 'center' : 'space-between';

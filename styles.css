@@ -126,7 +126,7 @@ small {
   display: none;
 }
 
-.contenedor-output p:nth-child(2) {
+.contenedor-output .parrafo-sin-mensaje {
   font-weight: bold;
   font-size: 1.5rem;
   color: var(--gray-500);
