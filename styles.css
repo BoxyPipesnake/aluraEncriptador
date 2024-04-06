@@ -107,6 +107,14 @@ small {
   background-color: var(--hover-gray);
 }
 
+.boton-funcion {
+  transition: transform 0.2s ease; 
+}
+
+.boton-funcion:hover {
+  transform: scale(1.05); 
+}
+
 .contenedor-output {
   background-color: var(--white);
   box-shadow: 0 24px 32px -8px rgba(0, 0, 0, 0.08);
@@ -117,9 +125,6 @@ small {
   margin-top: 2rem;
 
   color: var(--gray-400);
-  
-  /* overflow-wrap: break-word;
-  overflow-y: scroll; */
 }
 
 .muñeco {
@@ -157,6 +162,28 @@ small {
 .resultado {
   color: var(--dark-blue-300);
   font-size: 2rem;
+}
+
+.footer {
+  padding: 0 0.5rem 0.5rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon {
+  display: block;  
+  transition: transform 0.5s ease;
+}
+
+.icon img {
+  width: 48px;
+  height: 48px;
+}
+
+.icon:hover {
+  transform: scale(1.1);
 }
 
 /* Estilos para tablets en general */
@@ -199,7 +226,7 @@ small {
 /* primera columna */
 .seccion-1 {
   flex: 2; /* Ocupa 2/3 del espacio disponible */
-  margin-left: 10rem;
+  margin-left: 5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

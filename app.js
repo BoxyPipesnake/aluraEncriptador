@@ -5,13 +5,16 @@ function autoResize(textarea) {
 
 const botonEncriptar = document.getElementById('boton-encriptar');
 const botonDesencriptar = document.getElementById('boton-desencriptar');
+const contenedorOutput = document.getElementById('contenedor-output');
+const inputUsuario = document.getElementById('input-usuario');
+const iniciales = document.querySelector('.iniciales');
+
+
 const botonCopiar = document.createElement('button');
 botonCopiar.textContent = 'Copiar';
 botonCopiar.classList.add('boton-copiar');
 botonCopiar.style.display = 'none'; // Lo ocultamos inicialmente
 
-const contenedorOutput = document.getElementById('contenedor-output');
-const inputUsuario = document.getElementById('input-usuario');
 
 const parrafoResultado = document.createElement('p');
 parrafoResultado.classList.add('resultado');
@@ -20,6 +23,7 @@ contenedorOutput.appendChild(parrafoResultado); // Agregamos el párrafo al cont
 const mensajeError = document.createElement('p');
 mensajeError.classList.add('error');
 mensajeError.style.color = 'red';
+
 inputUsuario.insertAdjacentElement('afterend', mensajeError); // Insertamos el mensaje de error después del input
 
 const mostrarMensajeError = (mensaje) => {
@@ -31,8 +35,6 @@ const ocultarMensajeError = () => {
 };
 
 const mostrarElementosIniciales = (mostrar) => {
-
-    const iniciales = document.querySelector('.iniciales');
 
     const displayValue = mostrar ? 'block' : 'none';
 
@@ -96,8 +98,6 @@ const manejarInputUsuario = (texto, tipo) => {
         return;
     }
 
-    // mostrarElementosIniciales(true); -> Mostrar elementos iniciales si hay un error
-
     ocultarMensajeError();
     const textoTransformado = tipo === 'encriptar' ? encriptarTexto(mensaje) : desencriptarTexto(mensaje);
 
@@ -117,7 +117,7 @@ botonCopiar.addEventListener('click', async () => {
     try {
         // Uso de Clipboard API para copiar el texto encriptado/desencriptado al portapapeles
         await navigator.clipboard.writeText(textoCopiar);
-        alert('Texto copiado al portapapeles: ' + textoCopiar);
+        alert('Texto copiado al portapapeles');
     } catch (err) {
         console.error('Error al copiar el texto:', err);
     }
