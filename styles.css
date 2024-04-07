@@ -42,7 +42,7 @@ button {
 
 .contenedor-externo {
   height: 100%;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .contenedor-principal {
@@ -165,7 +165,7 @@ small {
 }
 
 .footer {
-  margin-top: 0.3rem;
+  margin-top: 1rem;
   padding: 0 0.5rem 0.5rem 0.5rem;
   display: flex;
   justify-content: center;
