@@ -87,13 +87,20 @@ const manejarInputUsuario = (texto, tipo) => {
 
     if (mensaje === '') {
         mostrarMensajeError('El campo de texto está vacío.');
-        mostrarElementosIniciales(true); 
+        mostrarElementosIniciales(true);
         return;
     }
 
     const hasSpecialCharacters = /[^a-z\s]/i.test(mensaje);
     if (hasSpecialCharacters) {
         mostrarMensajeError('No se permiten caracteres especiales o acentos.');
+        mostrarElementosIniciales(true);
+        return;
+    }
+
+    const hasUppercaseLetters = /[A-Z]/.test(texto);
+    if (hasUppercaseLetters) {
+        mostrarMensajeError('No se permiten letras mayúsculas.');
         mostrarElementosIniciales(true);
         return;
     }
@@ -105,6 +112,7 @@ const manejarInputUsuario = (texto, tipo) => {
     botonCopiar.style.display = 'block';
     mostrarElementosIniciales(false); // Ocultar elementos iniciales si la encriptación o desencriptación es exitosa
 };
+
 
 botonEncriptar.addEventListener('click', () => manejarInputUsuario(inputUsuario.value, 'encriptar'));
 botonDesencriptar.addEventListener('click', () => manejarInputUsuario(inputUsuario.value, 'desencriptar'));
